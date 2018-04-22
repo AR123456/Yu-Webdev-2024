@@ -1,0 +1,10 @@
+.article-title:hover {
+  color: red !important;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.save-btn:hover {
+  color: red;
+  font-size: 20px;
+}
