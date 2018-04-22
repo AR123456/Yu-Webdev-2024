@@ -1,5 +1,6 @@
-.DS_STORE
 node_modules
+Build
+.DS_STORE
 
 # Logs
 logs
@@ -7,6 +8,12 @@ logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# MacOS
+.DS_Store
+
+# Visual Studio Code
+.vscode
 
 # Runtime data
 pids
