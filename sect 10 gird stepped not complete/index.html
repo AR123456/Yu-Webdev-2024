@@ -29,13 +29,23 @@
       .container {
         height: 748px;
         width: 748px;
-        background-color: #f0f1ec;
+        background-color: #232629;
+        display: grid;
+        gap: 5px;
+        grid-template-columns: 320px 320px 50px;
+        grid-template-rows: 414px 155px 155px;
+      }
+      .box {
+        border: 1px solid red;
+        height: 100px;
       }
     </style>
   </head>
 
   <body>
-    <div class="container"></div>
+    <div class="container">
+      <div class="box"></div>
+    </div>
     <!-- Write your HTML here -->
   </body>
 </html>
