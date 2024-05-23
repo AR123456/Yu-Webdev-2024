@@ -12,6 +12,14 @@
       body {
         font-family: "Sono", sans-serif;
       }
+      .plan-title {
+        font-size: small;
+        font-weight: bold;
+      }
+      .plan-price {
+        font-size: large;
+        font-weight: bold;
+      }
       .pricing-container {
         display: flex;
         flex-wrap: wrap;
@@ -20,6 +28,7 @@
       }
       .plan-features {
         list-style-type: none;
+        font-size: small;
       }
       .pricing-plan {
         display: flex;
@@ -29,6 +38,7 @@
         justify-content: center;
         height: 200px;
         background-color: rgb(236, 230, 230);
+        width: 18rem;
       }
       .plan-button {
         background-color: orange;
@@ -38,6 +48,14 @@
       }
       /* Hint: What can you do with a media query and flexbox? */
       @media (max-width: 1250px) {
+        .pricing-container {
+          display: flex;
+          flex-wrap: wrap;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          gap: 20px;
+        }
       }
     </style>
   </head>
