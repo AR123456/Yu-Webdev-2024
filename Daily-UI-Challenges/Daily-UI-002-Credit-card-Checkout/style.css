@@ -1,4 +1,14 @@
+@import url("https://fonts.googleapis.com/css2?family=Libre+Bodoni:ital,wght@0,400..700;1,400..700&display=swap");
 .container {
-  background-image: linear-gradient(to top, #94e013 0%, #efe6f0 100%);
+  /* background-image: linear-gradient(to top, #474846 0%, #f8fbf5 100%); */
+  background-image: url(./cool-owl.jpg);
   min-height: 100vh;
+}
+
+.libre-bodoni {
+  font-family: "Libre Bodoni", serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 52px;
 }
