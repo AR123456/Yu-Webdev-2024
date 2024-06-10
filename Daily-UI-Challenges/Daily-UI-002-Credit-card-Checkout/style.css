@@ -1,0 +1,4 @@
+.container {
+  background-image: linear-gradient(to top, #94e013 0%, #efe6f0 100%);
+  min-height: 100vh;
+}
