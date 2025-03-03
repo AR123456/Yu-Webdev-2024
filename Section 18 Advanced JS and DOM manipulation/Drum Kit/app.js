@@ -1,11 +1,8 @@
+// this is an array like node list
 let drumButtons = document.querySelectorAll(".drum");
 
 for (let i = 0; i < drumButtons.length; i++) {
-  console.log(drumButtons[i]);
+  drumButtons[i].addEventListener("click", () => {
+    new Audio("./sounds/crash.mp3").play();
+  });
 }
-
-// document.querySelectorAll(".drum").addEventListener("click", handleClick);
-
-// function handleClick() {
-//   alert("click");
-// }
