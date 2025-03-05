@@ -51,4 +51,28 @@ function whenPressed(key) {
   let activeButton = document.querySelector("." + key);
   activeButton.classList.add("pressed");
   // add a delay
+  setTimeout(function () {
+    activeButton.classList.remove("pressed");
+  }, 100);
 }
+// /////////////// using request animation frame
+// function whenPressed(key) {
+//   let activeButton = document.querySelector("." + key);
+//   if (!activeButton) return;
+
+//   activeButton.classList.add("pressed");
+
+//   let start;
+//   function removeClass(timestamp) {
+//     if (!start) start = timestamp;
+//     let elapsed = timestamp - start;
+
+//     if (elapsed >= 100) {
+//       activeButton.classList.remove("pressed");
+//     } else {
+//       requestAnimationFrame(removeClass);
+//     }
+//   }
+
+//   requestAnimationFrame(removeClass);
+// }
