@@ -4,11 +4,13 @@ let drumButtons = document.querySelectorAll(".drum");
 for (let i = 0; i < drumButtons.length; i++) {
   drumButtons[i].addEventListener("click", () => {
     makeSound(drumButtons[i].innerHTML);
+    whenPressed(drumButtons[i].innerHTML);
   });
 }
 // keyboard input
 document.addEventListener("keyup", (e) => {
   makeSound(e.key);
+  whenPressed(e.key);
 });
 function makeSound(key) {
   switch (key) {
@@ -43,4 +45,10 @@ function makeSound(key) {
       console.log(drumButtons[i].innerHTML);
       break;
   }
+}
+function whenPressed(key) {
+  // getting the letter  <button class="w drum">w</button>
+  let activeButton = document.querySelector("." + key);
+  activeButton.classList.add("pressed");
+  // add a delay
 }
