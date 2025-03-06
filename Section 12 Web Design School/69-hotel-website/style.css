@@ -1,0 +1,15 @@
+body {
+  background-color: aquamarine;
+}
+.cardo-regular {
+  font-family: "Cardo", serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 52px;
+  color: white !important;
+  text-align: left;
+}
+.tag-line {
+  font-family: Helvetica;
+  text-align: left;
+}
