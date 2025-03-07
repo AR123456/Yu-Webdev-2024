@@ -5,6 +5,10 @@ function test() {
 
   /***********Do not change the code above 👆*******/
   //Write your code on lines 7 - 9:
+  let c = a;
+  let d = b;
+  a = d;
+  b = c;
 
   /***********Do not change the code below 👇*******/
 
