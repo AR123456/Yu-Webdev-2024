@@ -1,3 +1,3 @@
-let message = "Hello";
-let name = "Anne";
-alert(`${message} ${name}`);
+// length property
+let string = "some number";
+console.log(string.length);
