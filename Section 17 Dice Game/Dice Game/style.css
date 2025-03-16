@@ -1,0 +1,35 @@
+*,
+html {
+  box-sizing: border-box;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  overflow: hidden;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 60rem;
+  width: 60rem;
+}
+.card {
+  height: 50rem;
+  width: 50rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 2;
+}
+.dice {
+  margin: 20px;
+  height: 25rem;
+  width: 25rem;
+  background: red;
+}
