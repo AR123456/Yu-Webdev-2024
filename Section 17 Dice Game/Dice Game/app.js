@@ -16,7 +16,9 @@ window.addEventListener("load", () => {
   const roll = () => {
     let dice1 = Math.floor(Math.random() * 6 + 1);
     let dice2 = Math.floor(Math.random() * 6 + 1);
-    console.log(dice1, dice2);
+    // this is very jummpy look for another way to append  page
+    player1.innerHTML = dice1;
+    player2.innerHTML = dice2;
   };
   roll();
 });
