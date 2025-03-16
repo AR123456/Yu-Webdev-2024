@@ -22,3 +22,12 @@ window.addEventListener("load", () => {
   };
   roll();
 });
+
+// window.window onloadeddata, onloadstart
+// console.log(window.onbeforeunload);
+// https://developer.mozilla.org/en-US/docs/Web/API/Window/beforeunload_event
+
+// window.addEventListener("beforeunload", (e) => {
+//   e.preventDefault();
+//   body.innerHTML = `reload`;
+// });
