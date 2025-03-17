@@ -28,13 +28,35 @@ body {
   gap: 2;
 }
 .dice {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
   margin: 20px;
   height: 25rem;
   width: 25rem;
   background: red;
 }
+.dots {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+  align-content: stretch;
+  gap: 2;
+}
 .dot {
   height: 30px;
   width: 30px;
   background: rgb(255, 255, 255);
+  padding: 5px;
+}
+.row {
+  /* display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  align-content: stretch; */
 }
