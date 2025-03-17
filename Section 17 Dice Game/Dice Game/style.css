@@ -33,3 +33,8 @@ body {
   width: 25rem;
   background: red;
 }
+.dot {
+  height: 30px;
+  width: 30px;
+  background: rgb(255, 255, 255);
+}
