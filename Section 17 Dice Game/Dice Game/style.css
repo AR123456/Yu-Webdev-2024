@@ -66,3 +66,16 @@ body {
 .three-face .dot:nth-of-type(2) {
   align-self: center;
 }
+.four-face {
+  display: flex;
+  justify-content: space-between;
+}
+.four-face .column {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.five-face {
+  display: flex;
+  justify-content: space-between;
+}
