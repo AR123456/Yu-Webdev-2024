@@ -59,16 +59,21 @@ window.addEventListener("load", () => {
         </div>`;
   const player1 = document.querySelector(".player-1");
   const player2 = document.querySelector(".player-2");
+  const headerText = document.querySelector(".header-text");
   player1.innerHTML = diceFaceSix;
   player2.innerHTML = diceFaceSix;
-  const roll = () => {
-    let dice1 = Math.floor(Math.random() * 6 + 1);
-    let dice2 = Math.floor(Math.random() * 6 + 1);
-    // this is very jummpy look for another way to append  page
-    // player1.innerHTML = dice1;
-    // player2.innerHTML = dice2;
-  };
-  roll();
+  headerText.innerHTML = `Refresh to roll dice `;
+  window.addEventListener("click", () => {
+    const roll = () => {
+      let dice1 = Math.floor(Math.random() * 6 + 1);
+      let dice2 = Math.floor(Math.random() * 6 + 1);
+      // this is very jummpy look for another way to append  page
+      // player1.innerHTML = dice1;
+      // player2.innerHTML = dice2;
+      alert("clicked ");
+    };
+    roll();
+  });
 });
 
 // window.window onloadeddata, onloadstart
