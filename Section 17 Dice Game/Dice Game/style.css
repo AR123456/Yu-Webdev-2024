@@ -79,3 +79,21 @@ body {
   display: flex;
   justify-content: space-between;
 }
+.five-face .column {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.five-face .column:nth-of-type(2) {
+  display: flex;
+  justify-content: center;
+}
+.six-face {
+  display: flex;
+  justify-content: space-between;
+}
+.six-face .column {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
