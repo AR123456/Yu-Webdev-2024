@@ -62,7 +62,7 @@ window.addEventListener("load", () => {
   const headerText = document.querySelector(".header-text");
   player1.innerHTML = diceFaceSix;
   player2.innerHTML = diceFaceSix;
-  headerText.innerHTML = `Refresh to roll dice `;
+  headerText.innerHTML = `Click to roll dice `;
   window.addEventListener("click", () => {
     const roll = () => {
       let dice1 = Math.floor(Math.random() * 6 + 1);
@@ -70,7 +70,59 @@ window.addEventListener("load", () => {
       // this is very jummpy look for another way to append  page
       // player1.innerHTML = dice1;
       // player2.innerHTML = dice2;
-      alert("clicked ");
+      switch (dice1) {
+        case 1:
+          player1.innerHTML = diceFaceOne;
+          break;
+        case 2:
+          player1.innerHTML = diceFaceTwo;
+          break;
+        case 3:
+          player1.innerHTML = diceFaceThree;
+          break;
+        case 4:
+          player1.innerHTML = diceFaceFour;
+          break;
+        case 5:
+          player1.innerHTML = diceFaceFive;
+          break;
+        case 6:
+          player1.innerHTML = diceFaceSix;
+          break;
+        default:
+          player1.innerHTML = diceFaceSix;
+          break;
+      }
+      switch (dice2) {
+        case 1:
+          player2.innerHTML = diceFaceOne;
+          break;
+        case 2:
+          player2.innerHTML = diceFaceTwo;
+          break;
+        case 3:
+          player2.innerHTML = diceFaceThree;
+          break;
+        case 4:
+          player2.innerHTML = diceFaceFour;
+          break;
+        case 5:
+          player2.innerHTML = diceFaceFive;
+          break;
+        case 6:
+          player2.innerHTML = diceFaceSix;
+          break;
+        default:
+          player2.innerHTML = diceFaceSix;
+          break;
+      }
+      if (dice1 < dice2) {
+        headerText.innerHTML = `Player 2 Wins !`;
+      } else if (dice1 > dice2) {
+        headerText.innerHTML = `Player 1 Wins !`;
+      } else {
+        headerText.innerHTML = `Its a tie`;
+      }
     };
     roll();
   });
