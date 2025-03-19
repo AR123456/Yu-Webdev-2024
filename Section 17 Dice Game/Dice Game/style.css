@@ -9,6 +9,8 @@ body {
   justify-content: center;
   height: 100vh;
   overflow: hidden;
+  color: mediumaquamarine;
+  background-color: grey;
 }
 
 .container {
@@ -16,7 +18,7 @@ body {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  height: 60rem;
+  height: 30rem;
   width: 60rem;
 }
 .card {
@@ -28,6 +30,8 @@ body {
   align-items: center;
   background-color: blue;
   margin: 20px;
+}
+.sub-header {
 }
 .dice {
   padding: 4px;
