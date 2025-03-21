@@ -8,16 +8,15 @@ const app = express();
 const port = 3000;
 
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(morgan("common"));
-
+// app.use(morgan("tiny"));
+// present form to end user
 app.get("/", (req, res) => {
-  // res.sendFile(__dirname + "/public/index.html");
-  res.send("Hello");
-  console.log(process.stdout);
+  res.sendFile(__dirname + "/public/index.html");
 });
 
-app.post("/submit", (req, res) => {
+app.post("/submit", (req, res, next) => {
   console.log(req.body);
+  res.send(`<h2>Your band name is : ${req.body.street} ${req.body.pet}</h2>`);
 });
 
 app.listen(port, () => {
