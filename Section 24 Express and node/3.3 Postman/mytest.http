@@ -1,0 +1,11 @@
+ 
+###
+post http://localhost:3000/register
+
+###
+put http://localhost:3000/user/joe
+###
+patch http://localhost:3000/user/joe
+
+###
+delete http://localhost:3000/user/joe
