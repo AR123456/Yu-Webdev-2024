@@ -11,7 +11,6 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const app = express();
 const port = 3000;
 app.use(bodyParser.urlencoded({ extended: true }));
-let password;
 
 // function to check input does it = "ILoveProgramming"?
 function checkPassword(req, res, next) {
@@ -19,7 +18,7 @@ function checkPassword(req, res, next) {
   if (req.body.password !== "ILoveProgramming") {
     console.log(req.body.password);
   } else if (req.body.password == "ILoveProgramming") {
-    password = req.body.password;
+    res.sendFile(__dirname + "/public/secret.html");
   }
   // do some checking
   // if true put the path to secret page in var that gets passed in post
