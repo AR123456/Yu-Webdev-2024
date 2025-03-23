@@ -15,6 +15,12 @@ let password;
 
 // function to check input does it = "ILoveProgramming"?
 function checkPassword(req, res, next) {
+  // console.log(req.body.password);
+  if (req.body.password !== "ILoveProgramming") {
+    console.log(req.body.password);
+  } else if (req.body.password == "ILoveProgramming") {
+    password = req.body.password;
+  }
   // do some checking
   // if true put the path to secret page in var that gets passed in post
   next();
