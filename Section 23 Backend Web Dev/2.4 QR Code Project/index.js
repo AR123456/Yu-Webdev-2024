@@ -5,6 +5,7 @@
 */
 import inquirer from "inquirer";
 import fs from "fs";
+import qr from "qr-image";
 
 inquirer
   .prompt([
@@ -16,14 +17,17 @@ inquirer
   ])
   .then((answers) => {
     // save to fs
-    fs.writeFile("message.txt", "answers", (err) => {
+    fs.writeFile("message.txt", answers.url, (err) => {
       if (err) {
         throw err;
       }
-      console.log("saved");
     });
     console.log(answers.url);
     // call qr code generator
+    const qr_svg = qr.image(answers.url, { type: "svg" });
+    const qrStream = fs.createWriteStream("the_qr_code.svg");
+    qr_svg.pipe(qrStream);
+    qrStream.on("finish", () => console.log("QR saved"));
   })
   .catch((error) => {
     if (error.isTryErr) {
