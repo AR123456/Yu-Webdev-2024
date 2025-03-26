@@ -23,22 +23,18 @@ function getDay(req, res, next) {
     "Friday",
     "Saturday",
   ];
-  if (day === 1 || day === 7) {
-    let weekend = true;
-  }
-
+  // if (day === 1 || day === 7) {
+  //   let weekend = true;
+  // }
+  res.render(` <h1>Hey, its ${dayNames[day]}, !</h1>`);
   // res.send(` <h1>Hey, its ${dayNames[day]}, !</h1>`);
   next();
 }
 app.use(getDay);
 
 app.get("/", (req, res) => {
-  if (weekend) {
-    res.send(` <h1>Hey, its ${dayNames[day]}, !</h1>`);
-  } else {
-    res.send(` <h1>Hey, its ${dayNames[day]}, !</h1>`);
-  }
-  // res.sendFile(__dirname + "/oldSchool/index.html");
+  res.sendFile(__dirname + "/oldSchool/index.html");
+  //
 });
 
 app.listen(port, () => {
