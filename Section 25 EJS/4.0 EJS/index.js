@@ -34,9 +34,9 @@ app.use(getDay);
 
 app.get("/", (req, res) => {
   if (weekend) {
-    res.sendFile(__dirname + "/oldSchool/indexWeekend.html");
+    res.send(` <h1>Hey, its ${dayNames[day]}, !</h1>`);
   } else {
-    res.sendFile(__dirname + "/oldSchool/indexWeekday.html");
+    res.send(` <h1>Hey, its ${dayNames[day]}, !</h1>`);
   }
   // res.sendFile(__dirname + "/oldSchool/index.html");
 });
