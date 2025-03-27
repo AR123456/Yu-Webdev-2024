@@ -1,7 +1,9 @@
 import express from "express";
-
+import { dirname } from "path";
+import { fileURLToPath } from "url";
 import bodyParser from "body-parser";
 
+const __dirname = dirname(fileURLToPath(import.meta.url));
 const app = express();
 const port = 3000;
 
@@ -21,13 +23,20 @@ function getDay(req, res, next) {
     "Friday",
     "Saturday",
   ];
+  if (day === 0 || day === 6) {
+    res.send(` <h1>Hey, its ${dayNames[day]}, Enjoy your weekend  !</h1>`);
+    return;
+  } else {
+    res.send(` <h1>Hey, its ${dayNames[day]}, Make it a great day  !</h1>`);
+    return;
+  }
 
   next();
 }
 app.use(getDay);
 
 app.get("/", (req, res) => {
-  res.send("hello");
+  res.sendFile(__dirname + "/oldSchool/index.html");
 });
 
 app.listen(port, () => {
