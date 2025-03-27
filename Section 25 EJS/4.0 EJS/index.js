@@ -7,27 +7,11 @@ const port = 3000;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
-function getDay(req, res, next) {
+app.get("/", (req, res) => {
   const d = new Date();
 
   const day = d.getDay();
-
-  const dayNames = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-  ];
-
-  next();
-}
-app.use(getDay);
-
-app.get("/", (req, res) => {
-  res.send("hello");
+  res.render("index.ejs");
 });
 
 app.listen(port, () => {
