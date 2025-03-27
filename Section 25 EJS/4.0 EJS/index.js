@@ -11,7 +11,22 @@ app.get("/", (req, res) => {
   const d = new Date();
 
   const day = d.getDay();
-  res.render("index.ejs");
+  let type;
+  let dayNames = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  if (day === 0 || day === 6) {
+    type = "the weekend, get out and play!";
+  } else {
+    type = "just another work-a-day day.";
+  }
+  res.render("index.ejs", { dayNames: dayNames, day: day, type: type });
 });
 
 app.listen(port, () => {
