@@ -8,7 +8,7 @@
 
   <body>
     <h1>
-      <!-- Tite goes here -->
+ <%= title %>
     </h1>
     <p>
       Current second:
@@ -16,19 +16,11 @@
       <%= seconds %>
     </p>
 
-    <%= if(seconds%2===0){ <%>
-    <ul>
-      <%items.forEach((fruit)=>{ %>
-      <li><%=fruit %></li>
-
-      <%>})%>
-    </ul>
-    <%}
-
-    <p>
+ 
       <!-- HTML content goes here -->
     </p>
 
     <!-- Footer goes here -->
+    <%-include("footer.ejs")%>
   </body>
 </html>
