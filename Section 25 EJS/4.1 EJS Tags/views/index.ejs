@@ -18,11 +18,13 @@
 
     <%= if(seconds%2===0){ <%>
     <ul>
-      <%items.forEach((fruit)=>{})
+      <%items.forEach((fruit)=>{ %>
+      <li><%=fruit %></li>
+
+      <%>})%>
     </ul>
-    } else {
-    <p>No items to display</p>
-    }
+    <%}
+
     <p>
       <!-- HTML content goes here -->
     </p>
