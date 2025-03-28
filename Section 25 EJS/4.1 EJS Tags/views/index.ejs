@@ -16,14 +16,9 @@
       <%= seconds %>
     </p>
 
-    if (seconds % 2===0) {
+    <%= if(seconds%2===0){ <%>
     <ul>
-      <%= if(seconds%2===0){ <%-
-      <li>Even</li>
-      %> } %>
-      <!-- List goes here if current second is even. -->
-      <!-- Otherwise it should display the following: -->
-      <!-- <p>No items to display</p> -->
+      <%items.forEach((fruit)=>{})
     </ul>
     } else {
     <p>No items to display</p>
