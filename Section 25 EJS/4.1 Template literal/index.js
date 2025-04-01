@@ -9,6 +9,10 @@ app.get("/", (req, res) => {
     items: ["apple", "banana", "cherry"],
     htmlContent: "<strong>This is some strong text</strong>",
   };
+  const itemList =
+    data.seconds % 2 === 0
+      ? `<ul>${data.items.map((fruit) => `<li>${fruit}</li>`).join("")}</ul>`
+      : "<p>No items to display</p>";
 
   const html = `   <!DOCTYPE html>
     <html lang="en">
@@ -21,13 +25,7 @@ app.get("/", (req, res) => {
       <h1>${data.title}</h1>
       <p>Current second: ${data.seconds}</p>
    
-      ${
-        data.seconds % 2 === 0
-          ? `<ul>${data.items
-              .map((fruit) => `<li>${fruit}</li>`)
-              .join("")}</ul>`
-          : "<p>No items to display</p>"
-      }
+      ${itemList}
       <p>${data.htmlContent}</p>
       <footer>
         <p>Copyright © from footer</p>
