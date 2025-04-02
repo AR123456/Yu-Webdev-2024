@@ -10,25 +10,15 @@ const port = 3000;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
-function checkNameLength(req, res, next) {
-  const firstName = req.body.fname;
-  const lastName = req.body.lname;
-
-  console.log(firstName);
-  console.log(lastName);
-  next();
-}
-app.use(checkNameLength);
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/index.html");
 });
 
 app.post("/submit", (req, res) => {
-  console.log(req.body);
-  // checkNameLength(req.body);
-  // get data from form
-  // determine lettters in name
-  // write the number of letters to the  page
+  console.log(req.body.fName.length);
+  console.log(req.body.lName.length);
+  let nameLength = req.body.fName + req.body.lName;
+  res.send(`<h2>Your name has ${nameLength} letters </h2>`);
 });
 
 app.listen(port, () => {
