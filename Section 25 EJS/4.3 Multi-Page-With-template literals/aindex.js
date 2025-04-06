@@ -1,8 +1,11 @@
 import express from "express";
-
+import { dirname } from "path";
+import { fileURLToPath } from "url";
+import bodyParser from "body-parser";
+const __dirname = dirname(fileURLToPath(import.meta.url));
 const app = express();
 const port = 3000;
-
+app.use(bodyParser.urlencoded({ extended: true }));
 const header = ` <header>
   <nav class="navbar navbar-expand-custom navbar-mainbg">
     <a class="navbar-brand navbar-logo" href="#">My Portfolio</a>
@@ -76,25 +79,21 @@ const main = ` <h1>Home Page</h1>
     donec,sed sed. Vivamus sapien facilisi, tempor arcu nulla justo sed et, eget suspendisse lacus sed nunc mattis
     lectus.
     Metusgravida.</p>`;
-const html = `   <!DOCTYPE html>
-    <html lang="en">
-    <head>
-   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.css">
-  <link rel="stylesheet" href="/styles/layout.css">
-  <link rel="stylesheet" href="/styles/content.css">
-      <title>All About Me</title>
-    </head>
+const body = ` 
     <body>
   ${header}
     ${main}
   ${footer}
     </body>
-    </html>`;
+ `;
+function buildPage(req, res, next) {
+  console.log("buildPage ");
+  next();
+  //  write the js to append the const to the index.html
+}
+app.use(buildPage);
 app.get("/", (req, res) => {
-  res.send(html);
+  res.sendFile(__dirname + "/public/index.html");
 });
 app.listen(port, () => {
   console.log(`Server is running on port http://localhost:${port}`);
