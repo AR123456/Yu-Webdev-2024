@@ -21,7 +21,9 @@ app.post("/recipe", (req, res) => {
   //  when user clicks of the button to submit send post request to recipe route
   console.log(req.body.choice);
   // res.send(`<h2>${req.body.choice}</h2>`);
-  res.send(`<h2>${req.body.choice}</h2>`);
+  res.send(`<h2>${JSON.stringify(recipeJSON)}</h2>`);
+  console.log(recipeJSON);
+  console.log(JSON.stringify(recipeJSON));
   //Step 4: Add code to views/index.ejs to use the recieved recipe object.
 });
 
