@@ -11,7 +11,7 @@ const recipeJSON =
 
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
-
+let data;
 app.get("/", (req, res) => {
   res.render("index.ejs");
 });
@@ -20,10 +20,12 @@ app.post("/recipe", (req, res) => {
   //Step 3: Write your code here to make this behave like the solution website.
   //  when user clicks of the button to submit send post request to recipe route
   console.log(req.body.choice);
+  data = JSON.parse(recipeJSON)[0];
   // res.send(`<h2>${req.body.choice}</h2>`);
-  res.send(`<h2>${JSON.stringify(recipeJSON)}</h2>`);
-  console.log(recipeJSON);
-  console.log(JSON.stringify(recipeJSON));
+  res.send(`<h2>${data}</h2>`);
+
+  // console.log(JSON.parse(recipeJSON));
+  console.log(data);
   //Step 4: Add code to views/index.ejs to use the recieved recipe object.
 });
 
