@@ -19,7 +19,9 @@ app.get("/", (req, res) => {
 app.post("/recipe", (req, res) => {
   //Step 3: Write your code here to make this behave like the solution website.
   //  when user clicks of the button to submit send post request to recipe route
-  console.log(req.body);
+  console.log(req.body.choice);
+  // res.send(`<h2>${req.body.choice}</h2>`);
+  res.send(`<h2>${req.body.choice}</h2>`);
   //Step 4: Add code to views/index.ejs to use the recieved recipe object.
 });
 
