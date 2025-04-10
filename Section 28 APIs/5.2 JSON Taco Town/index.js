@@ -19,7 +19,7 @@ app.get("/", (req, res) => {
 app.post("/recipe", (req, res) => {
   //Step 3: Write your code here to make this behave like the solution website.
   //  when user clicks of the button to submit send post request to recipe route
-  console.log(req.body.choice);
+  // console.log(req.body.choice);
   switch (req.body.choice) {
     case "chicken":
       data = JSON.parse(recipeJSON)[0];
@@ -33,8 +33,9 @@ app.post("/recipe", (req, res) => {
     default:
       break;
   }
-  console.log(data);
+  console.log(data.ingredients.protein.name);
   //Step 4: Add code to views/index.ejs to use the recieved recipe object.
+  // res.send(`<h1>${data.ingredients.protein.name}</h1>`);
   res.redirect("/");
 });
 
