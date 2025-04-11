@@ -35,8 +35,19 @@ app.post("/recipe", (req, res) => {
       break;
   }
   console.log(recipe.ingredients.protein.name);
+  let everyTopping = recipe.ingredients.toppings.forEach((topping) => {
+    `${topping.quantity} of ${topping.name}`;
+  });
+  const recipeTemplate = `
+  <h3>Ingredients:</h3>
+   <ul id="ingredientsList">
+     <li>${recipe.ingredients.protein.name}, ${recipe.ingredients.protein.preparation}</li>
+     <li>${recipe.ingredients.salsa.name}</li>
+     <li>${everyTopping}</li>
+   </ul>
 
-  res.send(recipe);
+`;
+  res.send(recipeTemplate);
 });
 
 app.listen(port, () => {
