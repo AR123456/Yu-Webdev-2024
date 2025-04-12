@@ -35,15 +35,20 @@ app.post("/recipe", (req, res) => {
       break;
   }
   console.log(recipe.ingredients.protein.name);
-  let everyTopping = recipe.ingredients.toppings.forEach((topping) => {
-    `${topping.quantity} of ${topping.name}`;
-  });
+  // let everyTopping = recipe.ingredients.toppings
+  //   .map((topping) => {
+  //     `<li>${topping.quantity} of ${topping.name}</li>`;
+  //   })
+  //   .join(" ");
+  let everyTopping = recipe.ingredients.toppings
+    .map((topping) => `<li>${topping.quantity} of ${topping.name}</li>`)
+    .join("");
   const recipeTemplate = `
   <h3>Ingredients:</h3>
    <ul id="ingredientsList">
      <li>${recipe.ingredients.protein.name}, ${recipe.ingredients.protein.preparation}</li>
      <li>${recipe.ingredients.salsa.name}</li>
-     <li>${everyTopping}</li>
+      ${everyTopping}
    </ul>
 
 `;
