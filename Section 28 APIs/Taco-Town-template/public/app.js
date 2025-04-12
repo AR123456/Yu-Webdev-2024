@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const container = document.getElementById("recipeContainer");
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
-    const formData = newFormData(form);
+    const formData = new FormData(form);
     const response = await fetch("/recipe", {
       method: "POST",
       body: formData,
