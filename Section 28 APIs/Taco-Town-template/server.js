@@ -11,13 +11,17 @@ const recipeJSON =
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
-let recipe;
+// let recipe;
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "index.html"));
 });
 app.post("/recipe", (req, res) => {
   const choice = req.body.choice?.toLowerCase();
+  if (!choice) {
+    return res.status(400).send("No recipe choice provided");
+  }
   const recipes = JSON.parse(recipeJSON);
+  let recipe;
   switch (choice) {
     case "chicken":
       recipe = recipes[0];
@@ -32,9 +36,9 @@ app.post("/recipe", (req, res) => {
       return res.status(400).send("Invalid recipe choice");
       break;
   }
-  if (!recipe) {
-    return res.status(400).send("Recipe not found");
-  }
+  // if (!recipe) {
+  //   return res.status(400).send("Recipe not found");
+  // }
 
   let everyTopping = recipe.ingredients.toppings
     .map((topping) => `<li>${topping.quantity} of ${topping.name}</li>`)
