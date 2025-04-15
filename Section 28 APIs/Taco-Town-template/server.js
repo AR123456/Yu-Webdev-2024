@@ -46,6 +46,7 @@ app.post("/recipe", (req, res) => {
     .map((topping) => `<li>${topping.quantity} of ${topping.name}</li>`)
     .join("");
   const recipeTemplate = `
+  <h2>${recipe.name}</h2>
   <h3>Ingredients:</h3>
    <ul id="ingredientsList">
      <li>${recipe.ingredients.protein.name}, ${recipe.ingredients.protein.preparation}</li>
