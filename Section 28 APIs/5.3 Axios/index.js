@@ -33,6 +33,9 @@ app.post("/", async (req, res) => {
     );
     const result = response.data;
     console.log(result);
+    res.render("index.ejs", {
+      data: result[Math.floor(Math.random() * result.length)],
+    });
   } catch (error) {
     console.error("Request failed:", error.message);
     res.render("index.ejs", {
