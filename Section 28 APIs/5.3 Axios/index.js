@@ -25,8 +25,14 @@ app.get("/", async (req, res) => {
 });
 
 app.post("/", async (req, res) => {
-  console.log(req.body);
   try {
+    const type = req.body.type;
+    const participants = req.body.participants;
+    const response = await axios.get(
+      `https://bored-api.appbrewery.com/filter?type=${type}&participants=${participants}`
+    );
+    const result = response.data;
+    console.log(result);
   } catch (error) {
     console.error("Request failed:", error.message);
     res.render("index.ejs", {
