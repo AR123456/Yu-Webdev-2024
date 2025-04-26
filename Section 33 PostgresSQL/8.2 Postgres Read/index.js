@@ -1,7 +1,7 @@
 import express from "express";
 import bodyParser from "body-parser";
 import pg from "pg";
-
+// set up db connection
 const db = new pg.Client({
   user: "postgres",
   host: "localhost",
@@ -12,6 +12,7 @@ const db = new pg.Client({
 
 const app = express();
 const port = 3000;
+// connect to db
 db.connect();
 // define quiz array
 let quiz = [];
@@ -21,6 +22,7 @@ db.query("SELECT * FROM flags", (err, res) => {
   if (err) {
     console.err("Error", err.stack);
   } else {
+    // assign quiz to result
     quiz = res.rows;
   }
   db.end();
