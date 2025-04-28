@@ -31,6 +31,19 @@ app.get("/", async (req, res) => {
   // close the db
   db.end;
 });
+//  when user adds a country in the input on the home page
+// post request
+// get the string compare it to string in countries table , get its 2 letter code, send that 2 letter code to the front end to color teal
+app.post("/submit", async (req, res) => {
+  let inputCountry = req.body.answer.trim();
+  let arrOfDB = await db.query(
+    "SELECT country_code,country_name FROM countries"
+  );
+  let visitedCountry = arrOfDB.match(inputCountry);
+  console.log(visitedCountry);
+  // res.render("index.ejs", { countries: countries, total: countries.length });
+  db.end;
+});
 
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
