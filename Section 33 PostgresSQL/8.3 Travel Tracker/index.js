@@ -31,9 +31,16 @@ app.get("/", async (req, res) => {
   // close the db
   db.end;
 });
-
-app.post("/submit", async (req, res) => {
-  db.end;
+// this is add since it is the form action
+app.post("/add", async (req, res) => {
+  // get the string input
+  const input = req.body["country"];
+  // query db table of countries  where country_name = input and store in result var
+  const result = await db.query(
+    "SELECT country_code FROM countries WHERE country_name = $1",
+    [input]
+  );
+  console.log(result);
 });
 
 app.listen(port, () => {
