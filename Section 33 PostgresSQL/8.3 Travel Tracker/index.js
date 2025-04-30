@@ -40,7 +40,10 @@ app.post("/add", async (req, res) => {
     "SELECT country_code FROM countries WHERE country_name = $1",
     [input]
   );
-  console.log(result);
+  // console.log(result);
+  const countryCode = result.rows[0].country_code;
+  console.log(countryCode);
+  // insert the country code into the db
 });
 
 app.listen(port, () => {
