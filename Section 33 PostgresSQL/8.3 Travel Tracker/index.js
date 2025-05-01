@@ -35,12 +35,14 @@ app.get("/", async (req, res) => {
 app.post("/add", async (req, res) => {
   // get the string input
   const input = req.body["country"];
-  // query db table of countries  where country_name = input and store in result var
+
+  // query db table of countries  where country_name = input using the $1 place holder and store in result var
+  // the $1 allows us to put an expression in SQL
   const result = await db.query(
     "SELECT country_code FROM countries WHERE country_name = $1",
     [input]
   );
-  // check for a null result
+  // check for a null result - no match
   if (result.rows.length !== 0) {
     //
     const data = result.rows[0];
@@ -48,6 +50,9 @@ app.post("/add", async (req, res) => {
     await db.query("INSERT INTO visited_countries (country_code) VALUES ($1)", [
       countryCode,
     ]);
+    res.redirect("/");
+  } else {
+    // handle no match by going back to home
     res.redirect("/");
   }
 });
