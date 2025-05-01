@@ -16,8 +16,8 @@ db.connect();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
-// access to the home page
-app.get("/", async (req, res) => {
+// creating a get visited function
+async function checkVisited() {
   //query db for country visited - select column from table
   const result = await db.query("SELECT country_code FROM visited_countries");
   // declare the var
@@ -26,7 +26,12 @@ app.get("/", async (req, res) => {
   result.rows.forEach((country) => {
     countries.push(country.country_code);
   });
-  // pass the array to ejs
+  return countries;
+}
+// access to the home page
+app.get("/", async (req, res) => {
+  const countries = await checkVisited();
+  // pass the countries array to ejs
   res.render("index.ejs", { countries: countries, total: countries.length });
   // close the db
   db.end;
@@ -47,6 +52,7 @@ app.post("/add", async (req, res) => {
     //
     const data = result.rows[0];
     const countryCode = data.country_code;
+    //  add the country code found to the db using insert $1 SQL expression
     await db.query("INSERT INTO visited_countries (country_code) VALUES ($1)", [
       countryCode,
     ]);
