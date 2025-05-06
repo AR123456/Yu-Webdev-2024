@@ -40,11 +40,23 @@ app.get("/", async (req, res) => {
 app.post("/add", async (req, res) => {
   const input = req.body["country"];
   try {
-    //  all is well, country found and is not a dup  post the the cb
-    const result = await db.query();
+    //  take the input and find its matching country code
+    const result = await db.query(
+      "SELECT country_code FROM countries WHERE country_name = $1",
+      [input]
+    );
+    const data = result.rows[0];
+    const countryCode = data.country_code;
     try {
+      //   all is well, country found, check if it is a dup if not post
+      await db.query(
+        "INSERT INTO visited_countries (country_code) VALUES ($1)",
+        [countryCode]
+      );
+      res.redirect("/");
     } catch (error) {
       // found a match in the db list of countries but it has already been added
+      console.log(err);
     }
   } catch (err) {
     // catching case where input does not match the db
