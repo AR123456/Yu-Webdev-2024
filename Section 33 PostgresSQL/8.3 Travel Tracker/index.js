@@ -38,29 +38,47 @@ app.get("/", async (req, res) => {
 });
 // this is add since it is the form action
 app.post("/add", async (req, res) => {
-  // get the string input
   const input = req.body["country"];
-
-  // query db table of countries  where country_name = input using the $1 place holder and store in result var
-  // the $1 allows us to put an expression in SQL
-  const result = await db.query(
-    "SELECT country_code FROM countries WHERE country_name = $1",
-    [input]
-  );
-  // check for a null result - no match
-  if (result.rows.length !== 0) {
-    //
-    const data = result.rows[0];
-    const countryCode = data.country_code;
-    //  add the country code found to the db using insert $1 SQL expression
-    await db.query("INSERT INTO visited_countries (country_code) VALUES ($1)", [
-      countryCode,
-    ]);
-    res.redirect("/");
-  } else {
-    // handle no match by going back to home
-    res.redirect("/");
+  try {
+    //  all is well, country found and is not a dup  post the the cb
+    const result = await db.query();
+    try {
+    } catch (error) {
+      // found a match in the db list of countries but it has already been added
+    }
+  } catch (err) {
+    // catching case where input does not match the db
+    console.log(err);
+    const countries = await checkVisited();
+    res.render("index.ejs", {
+      countries: countries,
+      total: countries.length,
+      error: "Country name does not exist, try again.",
+    });
   }
+  // // get the string input
+  // const input = req.body["country"];
+
+  // // query db table of countries  where country_name = input using the $1 place holder and store in result var
+  // // the $1 allows us to put an expression in SQL
+  // const result = await db.query(
+  //   "SELECT country_code FROM countries WHERE country_name = $1",
+  //   [input]
+  // );
+  // // check for a null result - no match
+  // if (result.rows.length !== 0) {
+  //   //
+  //   const data = result.rows[0];
+  //   const countryCode = data.country_code;
+  //   //  add the country code found to the db using insert $1 SQL expression
+  //   await db.query("INSERT INTO visited_countries (country_code) VALUES ($1)", [
+  //     countryCode,
+  //   ]);
+  //   res.redirect("/");
+  // } else {
+  //   // handle no match by going back to home
+  //   res.redirect("/");
+  // }
 });
 
 app.listen(port, () => {
