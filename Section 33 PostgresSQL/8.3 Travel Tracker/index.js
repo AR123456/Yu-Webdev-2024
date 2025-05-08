@@ -49,14 +49,22 @@ app.post("/add", async (req, res) => {
     const countryCode = data.country_code;
     try {
       //   all is well, country found, check if it is a dup if not post
+      // when db set up made the country_code CHAR(2) NOT NULL UNIQUE
       await db.query(
         "INSERT INTO visited_countries (country_code) VALUES ($1)",
         [countryCode]
       );
       res.redirect("/");
-    } catch (error) {
+    } catch (err) {
       // found a match in the db list of countries but it has already been added
       console.log(err);
+      const countries = await checkVisited();
+      res.render("index.ejs", {
+        countries: countries,
+        total: countries.length,
+        // passing over the error place holder in ejs
+        error: "Country has already been added, try again. ",
+      });
     }
   } catch (err) {
     // catching case where input does not match the db
@@ -65,32 +73,10 @@ app.post("/add", async (req, res) => {
     res.render("index.ejs", {
       countries: countries,
       total: countries.length,
+      // passing over the error place holder in ejs
       error: "Country name does not exist, try again.",
     });
   }
-  // // get the string input
-  // const input = req.body["country"];
-
-  // // query db table of countries  where country_name = input using the $1 place holder and store in result var
-  // // the $1 allows us to put an expression in SQL
-  // const result = await db.query(
-  //   "SELECT country_code FROM countries WHERE country_name = $1",
-  //   [input]
-  // );
-  // // check for a null result - no match
-  // if (result.rows.length !== 0) {
-  //   //
-  //   const data = result.rows[0];
-  //   const countryCode = data.country_code;
-  //   //  add the country code found to the db using insert $1 SQL expression
-  //   await db.query("INSERT INTO visited_countries (country_code) VALUES ($1)", [
-  //     countryCode,
-  //   ]);
-  //   res.redirect("/");
-  // } else {
-  //   // handle no match by going back to home
-  //   res.redirect("/");
-  // }
 });
 
 app.listen(port, () => {
