@@ -42,8 +42,9 @@ app.post("/add", async (req, res) => {
   try {
     //  take the input and find its matching country code
     const result = await db.query(
-      "SELECT country_code FROM countries WHERE country_name = $1",
-      [input]
+      // here % is wild card, double pipes are wildcards, as long as the value $1 between the pipes matches anywhere in the country name its a match - make both lower case
+      "SELECT country_code FROM countries WHERE LOWER(country_name) LIKE '%' || $1 || '%';",
+      [input.toLowerCase()]
     );
     const data = result.rows[0];
     const countryCode = data.country_code;
