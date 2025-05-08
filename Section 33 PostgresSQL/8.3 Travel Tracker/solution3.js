@@ -46,6 +46,7 @@ app.post("/add", async (req, res) => {
     const data = result.rows[0];
     const countryCode = data.country_code;
     try {
+      // set up in the db that countries visited are unique
       await db.query(
         "INSERT INTO visited_countries (country_code) VALUES ($1)",
         [countryCode]
@@ -53,6 +54,7 @@ app.post("/add", async (req, res) => {
       res.redirect("/");
     } catch (err) {
       console.log(err);
+      // re render to pass the error through
       const countries = await checkVisisted();
       res.render("index.ejs", {
         countries: countries,
@@ -62,6 +64,7 @@ app.post("/add", async (req, res) => {
     }
   } catch (err) {
     console.log(err);
+    // re render to pass the error through
     const countries = await checkVisisted();
     res.render("index.ejs", {
       countries: countries,
