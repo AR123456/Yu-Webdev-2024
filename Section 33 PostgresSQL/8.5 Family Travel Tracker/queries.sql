@@ -24,7 +24,7 @@ JOIN contact_detail
 ON student.id = contact_detail.id
 
 
--- Many to One --
+-- Many to One  copy paste into pgadmin--
 CREATE TABLE homework_submission (
   id SERIAL PRIMARY KEY,
   mark INTEGER,
