@@ -23,7 +23,6 @@ db.query("SELECT * FROM capitals", (err, res) => {
     console.err("Error executing query", err.stack);
   } else {
     quiz = res.rows;
-    console.log(quiz);
   }
   db.end();
 });
@@ -45,8 +44,10 @@ app.get("/", async (req, res) => {
 
 // POST a new post
 app.post("/submit", (req, res) => {
+  // trim extra characters if there are any
   let answer = req.body.answer.trim();
   let isCorrect = false;
+  // normalize casing
   if (currentQuestion.capital.toLowerCase() === answer.toLowerCase()) {
     totalCorrect++;
     console.log(totalCorrect);
