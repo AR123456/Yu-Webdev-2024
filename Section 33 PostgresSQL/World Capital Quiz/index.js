@@ -1,14 +1,11 @@
 import express from "express";
 import bodyParser from "body-parser";
+// use postgres package
 import pg from "pg";
 const app = express();
 const port = 3000;
 let quiz;
-// let quiz = [
-//   { country: "France", capital: "Paris" },
-//   { country: "United Kingdom", capital: "London" },
-//   { country: "United States of America", capital: "New York" },
-// ];
+// define the client  with object of required items
 const db = new pg.Client({
   user: "postgres",
   host: "localhost",
@@ -16,14 +13,16 @@ const db = new pg.Client({
   password: "midnight",
   port: 5432,
 });
+// connect to the db
 db.connect();
-// console.log(db.port);
+// make the query when the page loads var quiz becomes an array of records from the db
 db.query("SELECT * FROM capitals", (err, res) => {
   if (err) {
     console.err("Error executing query", err.stack);
   } else {
     quiz = res.rows;
   }
+  // close connection to db when query done
   db.end();
 });
 let totalCorrect = 0;
