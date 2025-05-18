@@ -20,12 +20,18 @@ app.get("/register", (req, res) => {
 });
 
 app.post("/register", async (req, res) => {
-  // TODO console.log what user puts in user name and password field
-  console.log(req.body.username);
-  console.log(req.body.password);
+  const username = req.body.username;
+  const password = req.body.password;
+  console.log(username);
+  console.log(password);
 });
 
-app.post("/login", async (req, res) => {});
+app.post("/login", async (req, res) => {
+  const username = req.body.username;
+  const password = req.body.password;
+  console.log(username);
+  console.log(password);
+});
 
 app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`);
