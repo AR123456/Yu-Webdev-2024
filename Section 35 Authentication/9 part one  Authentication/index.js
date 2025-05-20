@@ -23,15 +23,12 @@ app.get("/", (req, res) => {
 app.get("/login", (req, res) => {
   res.render("login.ejs");
 });
-
 app.get("/register", (req, res) => {
   res.render("register.ejs");
 });
-
 app.post("/register", async (req, res) => {
   const email = req.body.username;
   const password = req.body.password;
-
   try {
     const checkResult = await db.query("SELECT * FROM users WHERE email=$1", [
       email,
@@ -43,19 +40,35 @@ app.post("/register", async (req, res) => {
         "INSERT INTO users (email,password) VALUES($1,$2)",
         [email, password]
       );
-
       res.render("secrets.ejs");
     }
   } catch (err) {
     console.log(err);
   }
 });
-
 app.post("/login", async (req, res) => {
   const email = req.body.username;
   const password = req.body.password;
-  console.log(email);
-  console.log(password);
+  try {
+    const result = await db.query("SELECT * FROM users WHERE email=$1", [
+      email,
+    ]);
+
+    if (result.rows.length > 0) {
+      const user = result.rows[0];
+      // user is =  { id: 2, email: 'test@test.com', password: '123456' }
+      const storedPassword = user.password;
+      if (password === storedPassword) {
+        res.render("secrets.ejs");
+      } else {
+        res.send("Incorrect Password - but dont tell scammer that ");
+      }
+    } else {
+      res.send("User not found - but dont tell scammer that ");
+    }
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 app.listen(port, () => {
