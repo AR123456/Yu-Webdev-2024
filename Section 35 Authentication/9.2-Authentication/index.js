@@ -1,15 +1,18 @@
 import express from "express";
 import bodyParser from "body-parser";
 import pg from "pg";
+import bcrypt from "bcrypt";
 
 const app = express();
 const port = 3000;
+// more salts more computing power used but more secure
+const saltRounds = 10;
 
 const db = new pg.Client({
   user: "postgres",
   host: "localhost",
   database: "secrets",
-  password: "#",
+  password: "midnight",
   port: 5432,
 });
 db.connect();
@@ -41,12 +44,22 @@ app.post("/register", async (req, res) => {
     if (checkResult.rows.length > 0) {
       res.send("Email already exists. Try logging in.");
     } else {
-      const result = await db.query(
-        "INSERT INTO users (email, password) VALUES ($1, $2)",
-        [email, password]
-      );
-      console.log(result);
-      res.render("secrets.ejs");
+      // hash the pw before putting into db- hash takes pw,rounds and callback
+      bcrypt.hash(password, saltRounds, async (err, hash) => {
+        // handle any errors in the hashing process
+        if (err) {
+          console.log("Error hashing pw");
+        }
+        // this gets stored instead of plain text pw
+        // save to db
+        const result = await db.query(
+          "INSERT INTO users (email, password) VALUES ($1, $2)",
+          // [email, password]
+          [email, hash]
+        );
+        console.log(result);
+        res.render("secrets.ejs");
+      });
     }
   } catch (err) {
     console.log(err);
