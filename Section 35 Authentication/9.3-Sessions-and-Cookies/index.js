@@ -134,8 +134,15 @@ passport.use(
     }
   })
 );
-//
-
+// need to include serializeUser and deserialize user
+passport.serializeUser((user, cb) => {
+  // save user to local storage
+  cb(null, user);
+});
+passport.deserializeUser((user, cb) => {
+  // get user from local storage
+  cb(null, user);
+});
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
