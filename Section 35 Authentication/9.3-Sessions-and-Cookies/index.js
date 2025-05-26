@@ -52,6 +52,7 @@ app.get("/register", (req, res) => {
 // does the user have a active session ?
 app.get("./secrets", (req, res) => {
   // comes from passport, gets saved into the request
+  // console.log(req.user)
   if (req.isAuthenticated()) {
     res.render("secrets.ejs");
   } else {
@@ -101,30 +102,40 @@ passport.use(
     console.log(username);
     try {
       const result = await db.query("SELECT * FROM users WHERE email = $1", [
-        email,
+        // email,
+        username,
       ]);
       if (result.rows.length > 0) {
         const user = result.rows[0];
         const storedHashedPassword = user.password;
-        bcrypt.compare(loginPassword, storedHashedPassword, (err, result) => {
+        // bcrypt.compare(loginPassword, storedHashedPassword, (err, result) => {
+        bcrypt.compare(password, storedHashedPassword, (err, result) => {
           if (err) {
-            console.error("Error comparing passwords:", err);
+            // console.error("Error comparing passwords:", err);
+            return cb(err);
           } else {
             if (result) {
-              res.render("secrets.ejs");
+              // succcess
+              return cb(null, user);
             } else {
-              res.send("Incorrect Password");
+              // res.send("Incorrect Password");
+              return cb(null, false);
             }
           }
         });
       } else {
-        res.send("User not found");
+        // res.send("User not found");
+        return cb("User not found");
       }
     } catch (err) {
-      console.log(err);
+      // db query
+      // console.log(err);
+      return cb(err);
     }
   })
 );
+//
+
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
