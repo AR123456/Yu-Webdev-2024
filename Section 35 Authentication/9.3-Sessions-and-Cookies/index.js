@@ -90,11 +90,21 @@ app.post("/register", async (req, res) => {
           console.error("Error hashing password:", err);
         } else {
           console.log("Hashed Password:", hash);
-          await db.query(
-            "INSERT INTO users (email, password) VALUES ($1, $2)",
+          // save this in const
+          const result = await db.query(
+            // SQL returning command to return what was just inserted
+            "INSERT INTO users (email, password) VALUES ($1, $2) RETURNING *",
             [email, hash]
           );
-          res.render("secrets.ejs");
+          // set user to the result
+          const user = result.rows[0];
+          // res.render("secrets.ejs");
+          // replace res.render with passports req.login() - it takes user to save to session
+          // and a call back
+          req.login(user, (err) => {
+            console.log(err);
+            res.redirect("/secrets");
+          });
         }
       });
     }
