@@ -50,7 +50,7 @@ app.get("/register", (req, res) => {
   res.render("register.ejs");
 });
 // does the user have a active session ?
-app.get("./secrets", (req, res) => {
+app.get("/secrets", (req, res) => {
   // comes from passport, gets saved into the request
   // console.log(req.user)
   if (req.isAuthenticated()) {
@@ -59,7 +59,14 @@ app.get("./secrets", (req, res) => {
     res.redirect("/login");
   }
 });
-
+// use passport middleware- this method triggers the strategy
+app.post(
+  "/login",
+  passport.authenticate("local", {
+    successRedirect: "/secrets",
+    failureRedirect: "/login",
+  })
+);
 app.post("/register", async (req, res) => {
   const email = req.body.username;
   const password = req.body.password;
@@ -91,11 +98,6 @@ app.post("/register", async (req, res) => {
   }
 });
 
-app.post("/login", async (req, res) => {
-  // passport will get user and email now no need to get from body parser
-  // const email = req.body.username;
-  // const loginPassword = req.body.password;
-});
 // username and password here match the "name=" attribute on the input in the front end log in form
 passport.use(
   new Strategy(async function verify(username, password, cb) {
@@ -144,5 +146,5 @@ passport.deserializeUser((user, cb) => {
   cb(null, user);
 });
 app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
+  console.log(`Server is running at http://localhost:${port}`);
 });
