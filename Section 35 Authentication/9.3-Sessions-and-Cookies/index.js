@@ -23,6 +23,11 @@ app.use(
     resave: false,
     // do we want to force save session to store(in our case server memory)
     saveUninitialized: true,
+    // can add the cookie option to save the cookie if the user closes the window
+    cookie: {
+      // milliseconds -one day
+      maxAge: 1000 * 60 * 60 * 24,
+    },
   })
 );
 // passport must be after the session is initialized
@@ -52,7 +57,7 @@ app.get("/register", (req, res) => {
 // does the user have a active session ?
 app.get("/secrets", (req, res) => {
   // comes from passport, gets saved into the request
-  // console.log(req.user)
+  console.log(req.user);
   if (req.isAuthenticated()) {
     res.render("secrets.ejs");
   } else {
