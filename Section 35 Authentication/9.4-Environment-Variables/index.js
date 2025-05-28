@@ -25,13 +25,6 @@ app.use(express.static("public"));
 app.use(passport.initialize());
 app.use(passport.session());
 
-// const db = new pg.Client({
-//   user: "postgres",
-//   host: "localhost",
-//   database: "secrets",
-//   password: "midnight",
-//   port: 5432,
-// });
 //  use env instead
 const db = new pg.Client({
   user: process.env.PG_USER,
