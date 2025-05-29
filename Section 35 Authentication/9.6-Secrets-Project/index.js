@@ -62,14 +62,17 @@ app.get("/secrets", async (req, res) => {
     try {
       const result = await db.query(
         `SELECT secret FROM users WHERE email = $1`,
-        [req.user.mail]
+        [req.user.email]
       );
-      console.log(result);
+      const secret = result.rows[0].secret;
+      if (secret) {
+        res.render("secrets.ejs", { secret: secret });
+      } else {
+        res.render("secrets.ejs", { secret: "Jack Bauer is my hero." });
+      }
     } catch (err) {
       console.log(err);
     }
-    // res.render("secrets.ejs");
-    //TODO: Update this to pull in the user secret to render in secrets.ejs
   } else {
     res.redirect("/login");
   }
