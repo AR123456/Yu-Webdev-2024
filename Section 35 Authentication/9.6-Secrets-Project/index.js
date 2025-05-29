@@ -80,21 +80,28 @@ app.get("/secrets", async (req, res) => {
 
 //TODO: Add a get route for the submit button
 //Think about how the logic should work with authentication.
+app.get("/submit", function (req, res) {
+  if (req.isAuthenticated()) {
+    res.render("submit.ejs");
+  } else {
+    res.redirect("/login");
+  }
+});
 
-app.get(
-  "/auth/google",
-  passport.authenticate("google", {
-    scope: ["profile", "email"],
-  })
-);
+// app.get(
+//   "/auth/google",
+//   passport.authenticate("google", {
+//     scope: ["profile", "email"],
+//   })
+// );
 
-app.get(
-  "/auth/google/secrets",
-  passport.authenticate("google", {
-    successRedirect: "/secrets",
-    failureRedirect: "/login",
-  })
-);
+// app.get(
+//   "/auth/google/secrets",
+//   passport.authenticate("google", {
+//     successRedirect: "/secrets",
+//     failureRedirect: "/login",
+//   })
+// );
 
 app.post(
   "/login",
