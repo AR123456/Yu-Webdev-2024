@@ -56,10 +56,19 @@ app.get("/logout", (req, res) => {
   });
 });
 
-app.get("/secrets", (req, res) => {
+app.get("/secrets", async (req, res) => {
+  // console.log(req.user);
   if (req.isAuthenticated()) {
-    res.render("secrets.ejs");
-
+    try {
+      const result = await db.query(
+        `SELECT secret FROM users WHERE email = $1`,
+        [req.user.mail]
+      );
+      console.log(result);
+    } catch (err) {
+      console.log(err);
+    }
+    // res.render("secrets.ejs");
     //TODO: Update this to pull in the user secret to render in secrets.ejs
   } else {
     res.redirect("/login");
